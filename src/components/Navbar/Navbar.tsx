@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { navbarItem } from "./data";
-import logo from "../../assets/logo.webp";
+import logo from "/assets/logo.webp";
 import MobileMenu from "./MobileMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
