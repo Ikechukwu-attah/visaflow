@@ -1,10 +1,14 @@
 import React from "react";
 import MainLayout from "../layouts/MainLayout";
+import HeroSection from "../components/Hero/hero";
 
 const Home = () => {
   return (
     <MainLayout>
-      <h1>home</h1>
+      <div className="md:px-16">
+        {" "}
+        <HeroSection />
+      </div>
     </MainLayout>
   );
 };

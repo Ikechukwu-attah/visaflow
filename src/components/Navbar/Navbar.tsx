@@ -3,6 +3,7 @@ import { navbarItem } from "./data";
 import logo from "../../assets/logo.webp";
 import MobileMenu from "./MobileMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,14 +27,18 @@ const Navbar: FC = () => {
           height={"40px"}
           className="flex justify-center items-center rounded-full"
         />
-        <ul className="flex justify-between gap-4 text-xl space-x-8">
+        <ul className="flex justify-between gap-4 text-lg space-x-8">
           {mainNavbarItem.map((item) => (
-            <li key={item.id}>{item.item}</li>
+            <li key={item.id}>
+              <Link to={item.url}>{item.item}</Link>
+            </li>
           ))}
         </ul>
-        <ul className="flex justify-between gap-4 text-xl">
+        <ul className="flex justify-between gap-4 text-lg">
           {authNavbarItem.map((item) => (
-            <li key={item.id}>{item.item}</li>
+            <li key={item.id}>
+              <Link to={item.url}>{item.item}</Link>
+            </li>
           ))}
         </ul>
       </nav>
@@ -50,7 +55,7 @@ const Navbar: FC = () => {
 
         {/* Mobile Menu Button (Always Visible on Small Screens) */}
         <button
-          className="text-2xl absolute  top-4 right-4"
+          className="text-2xl absolute  top-4 right-4 cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}

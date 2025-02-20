@@ -1,5 +1,6 @@
 import React from "react";
 import { navbarItem } from "./data";
+import { Link } from "react-router-dom";
 
 interface MobileProps {
   isOpen: boolean;
@@ -12,7 +13,7 @@ const MobileMenu = ({ isOpen, isClose }: MobileProps) => {
         isOpen ? "translate-y-0" : "-translate-y-full"
       } z-50 flex flex-col justify-center items-center`}
     >
-      <ul>
+      <ul className="gap-4 text-lg flex flex-col ">
         {navbarItem.map((item) => (
           <li
             className="cursor-pointer"
@@ -22,7 +23,7 @@ const MobileMenu = ({ isOpen, isClose }: MobileProps) => {
             }}
             key={item.id}
           >
-            {item.item}
+            <Link to={item.url}>{item.item}</Link>
           </li>
         ))}
       </ul>
