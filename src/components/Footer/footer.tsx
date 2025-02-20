@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <Fragment>
       {/* ✅ Main Footer */}
-      <footer className="w-full p-6 md:px-16 bg-gray-800 text-white flex flex-col md:flex-row gap-8 md:gap-16">
+      <footer className="w-full p-6 md:px-16 bg-[#0A192F] py-24 text-white flex flex-col md:flex-row gap-8 md:gap-16">
         {/* ✅ Company Info Section */}
         <div className="flex flex-col gap-3 md:w-1/4">
           <div className="flex items-center gap-2">

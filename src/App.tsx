@@ -1,11 +1,16 @@
 import "../src/style.css";
-import Home from "./pages/Home";
 
+import { publicRoute } from "./routes/routes";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
       <div>
-        <Home />
+        <Routes>
+          {publicRoute.map(({ path, element, id }) => (
+            <Route key={id} path={path} element={element} />
+          ))}
+        </Routes>
       </div>
     </>
   );

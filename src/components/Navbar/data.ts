@@ -11,6 +11,6 @@ export const navbarItem: NavbarItem[] = [
   { id: 4, item: "Testimonials", url: "/" },
   { id: 5, item: "FAQ", url: "/" },
   { id: 6, item: "Contact Us", url: "/" },
-  { id: 7, item: "Login", url: "/" },
-  { id: 8, item: "Sign Up", url: "/" },
+  { id: 7, item: "Login", url: "/login" },
+  { id: 8, item: "Sign Up", url: "/signup" },
 ];
