@@ -1,5 +1,6 @@
 import Home from "../pages/Home";
 import Login from "../pages/Auth/Login/Login";
+import Signup from "../pages/Auth/SignUp/Signup";
 
 type RouteProps = {
   id: number;
@@ -14,4 +15,5 @@ export const protectedRoute: RouteProps[] = [
 export const publicRoute: RouteProps[] = [
   { id: 1, path: "/", element: <Home /> },
   { id: 2, path: "/login", element: <Login /> },
+  { id: 3, path: "/signup", element: <Signup /> },
 ];
