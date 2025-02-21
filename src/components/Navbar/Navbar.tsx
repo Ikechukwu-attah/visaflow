@@ -4,6 +4,7 @@ import logo from "/assets/logo.webp";
 import MobileMenu from "./MobileMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Notifications from "../Notification/Notifications";
 
 const Navbar: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,6 +28,7 @@ const Navbar: FC = () => {
           height={"40px"}
           className="flex justify-center items-center rounded-full"
         />
+
         <ul className="flex justify-between gap-4 text-lg space-x-8">
           {mainNavbarItem.map((item) => (
             <li key={item.id}>
@@ -41,6 +43,7 @@ const Navbar: FC = () => {
             </li>
           ))}
         </ul>
+        <Notifications />
       </nav>
 
       <div className="w-full bg-white shadow-md p-4 flex justify-between relative z-100 items-center md:hidden">
