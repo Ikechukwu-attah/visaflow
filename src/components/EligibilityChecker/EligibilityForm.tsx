@@ -3,6 +3,8 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
+import StepFive from "./StepFive"; // Gender & LGBTQ+ Questions
+import StepSix from "./StepSix"; // Refugee Status Questions
 import Results from "./Results";
 
 const EligibilityForm: React.FC = () => {
@@ -13,20 +15,37 @@ const EligibilityForm: React.FC = () => {
     age: "",
     nationality: "",
   });
+
   const [travelPurpose, setTravelPurpose] = useState("");
+
   const [travelHistory, setTravelHistory] = useState({
     visitedCanada: "",
     visaDenied: "",
   });
+
   const [employmentDetails, setEmploymentDetails] = useState({
     jobOffer: "",
     highestEducation: "",
     workExperience: "",
   });
 
-  // ✅ Prevent Progress Bar from Increasing Beyond Step 4
+  // ✅ Correct Gender Details
+  const [genderDetails, setGenderDetails] = useState({
+    gender: "",
+    facingDiscrimination: "",
+    countryDiscriminates: "",
+  });
+
+  // ✅ Correct Refugee Status
+  const [refugeeStatus, setRefugeeStatus] = useState({
+    fleeingPersecution: "",
+    persecutionType: "",
+    previousRefugeeApplication: "",
+  });
+
+  // ✅ Prevent Progress Bar from Increasing Beyond Step 6
   const nextStep = () => {
-    if (step < 5) {
+    if (step < 7) {
       setStep((prev) => prev + 1);
     }
   };
@@ -41,12 +60,12 @@ const EligibilityForm: React.FC = () => {
     <div className="max-w-3xl mx-auto mt-10">
       {/* ✅ Fixed Progress Bar */}
       <div className="mb-4 text-center text-gray-600">
-        Step {Math.min(step, 4)} of 4
+        Step {Math.min(step, 6)} of 6
       </div>
       <div className="w-full bg-gray-300 rounded-full h-2">
         <div
           className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-          style={{ width: `${(Math.min(step, 4) / 4) * 100}%` }}
+          style={{ width: `${(Math.min(step, 6) / 6) * 100}%` }}
         ></div>
       </div>
 
@@ -78,12 +97,28 @@ const EligibilityForm: React.FC = () => {
           />
         )}
         {step === 5 && (
+          <StepFive
+            nextStep={nextStep}
+            prevStep={prevStep}
+            setGenderDetails={setGenderDetails} // ✅ Corrected function
+          />
+        )}
+        {step === 6 && (
+          <StepSix
+            nextStep={nextStep}
+            prevStep={prevStep}
+            setRefugeeStatus={setRefugeeStatus} // ✅ Corrected function
+          />
+        )}
+        {step === 7 && (
           <Results
             userResponses={{
               personalInfo,
               travelPurpose,
               travelHistory,
               employmentDetails,
+              genderDetails,
+              refugeeStatus,
             }}
           />
         )}

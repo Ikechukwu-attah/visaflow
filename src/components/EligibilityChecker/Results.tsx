@@ -17,6 +17,16 @@ type ResultsProps = {
       highestEducation: string;
       workExperience: string;
     };
+    genderDetails: {
+      gender: string;
+      facingDiscrimination: string;
+      countryDiscriminates: string;
+    };
+    refugeeStatus: {
+      fleeingPersecution: string;
+      persecutionType: string;
+      previousRefugeeApplication: string;
+    };
   };
 };
 
