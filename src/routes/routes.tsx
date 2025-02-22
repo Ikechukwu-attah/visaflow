@@ -17,6 +17,7 @@ import VisaStatus from "../components/Dashboard/VisaStatus/VisaStatus";
 import ConsultationBooking from "../components/Dashboard/Consultation/ConsultationBooking";
 import DocumentUpload from "../components/Dashboard/DocumentUpload/DocumentUpload";
 import Payments from "../components/Admin/Payment";
+import VisaEligibility from "../pages/EligibilityChecker/VisaEligibility";
 
 type RouteProps = {
   id: number;
@@ -40,6 +41,7 @@ export const publicRoute: RouteProps[] = [
   { id: 7, path: "/document-upload", element: <DocumentUpload /> },
   { id: 8, path: "/book-consultation", element: <ConsultationBooking /> },
   { id: 9, path: "/payment", element: <Payment /> },
+  { id: 16, path: "/eligibility-check", element: <VisaEligibility /> },
   {
     id: 10,
     path: "/admin",

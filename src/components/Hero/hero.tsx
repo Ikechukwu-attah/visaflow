@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const HeroSection = () => {
   return (
     <div className="bg-gradient-to-r from-[#1E3A8A] to-[#6366F1] w-full min-h-[90vh] flex flex-col items-center justify-center text-center px-6 md:px-16">
@@ -11,7 +13,7 @@ const HeroSection = () => {
       </p>
 
       <button className="mt-6 text-lg md:text-xl rounded-full px-6 py-3 bg-white text-blue-800 font-semibold shadow-lg hover:bg-gray-200 transition">
-        Check Your Eligibility
+        <Link to={"/eligibility-check"}>Check Your Eligibility</Link>
       </button>
     </div>
   );

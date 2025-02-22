@@ -10,7 +10,7 @@ interface StepProps {
   }) => void;
 }
 
-type FormValues = {
+type FormInputs = {
   name: string;
   age: string;
   nationality: string;
@@ -21,29 +21,21 @@ const StepOne: React.FC<StepProps> = ({ nextStep, setPersonalInfo }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FormInputs>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
     setPersonalInfo(data);
     nextStep();
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="bg-white p-8 shadow-lg rounded-lg w-full max-w-2xl mx-auto space-y-6"
-    >
-      <h2 className="text-2xl font-bold text-gray-900">
-        Step 1: Personal Information
-      </h2>
-
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       {/* Full Name */}
       <div>
-        <label className="text-sm font-medium">Full Name</label>
         <input
           {...register("name", { required: "Full Name is required" })}
-          placeholder="Enter Full Name"
-          className="w-full p-4 border rounded-md"
+          placeholder="Full Name"
+          className="w-full p-3 border rounded-md"
         />
         {errors.name && (
           <p className="text-red-500 text-sm">{errors.name.message}</p>
@@ -52,12 +44,11 @@ const StepOne: React.FC<StepProps> = ({ nextStep, setPersonalInfo }) => {
 
       {/* Age */}
       <div>
-        <label className="text-sm font-medium">Age</label>
         <input
           type="number"
           {...register("age", { required: "Age is required" })}
-          placeholder="Enter Age"
-          className="w-full p-4 border rounded-md"
+          placeholder="Age"
+          className="w-full p-3 border rounded-md"
         />
         {errors.age && (
           <p className="text-red-500 text-sm">{errors.age.message}</p>
@@ -66,10 +57,9 @@ const StepOne: React.FC<StepProps> = ({ nextStep, setPersonalInfo }) => {
 
       {/* Nationality */}
       <div>
-        <label className="text-sm font-medium">Nationality</label>
         <select
           {...register("nationality", { required: "Nationality is required" })}
-          className="w-full p-4 border rounded-md"
+          className="w-full p-3 border rounded-md"
         >
           <option value="">Select Nationality</option>
           <option value="Canada">Canada</option>
@@ -82,8 +72,8 @@ const StepOne: React.FC<StepProps> = ({ nextStep, setPersonalInfo }) => {
         )}
       </div>
 
-      {/* Next Button */}
-      <div className="flex justify-end">
+      {/* Submit Button (No extra buttons) */}
+      <div className="flex justify-end mt-6">
         <button
           type="submit"
           className="px-6 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition"
