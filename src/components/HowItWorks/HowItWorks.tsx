@@ -1,19 +1,20 @@
 import React from "react";
 import { howItWorkData } from "./data";
+import LandingSection from "../../layouts/LandingSection";
 
 const HowItWorks = () => {
   return (
-    <section className="relative w-full px-6 md:px-52 py-20 bg-gray-900 text-white">
+    <LandingSection className="py-20 bg-gray-900 text-white" id="how-it-works">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold">How It Works</h2>
       </div>
 
-      {/* Diagonal Cards Layout on Large Screens, Centered on Small Screens */}
+      {/* ✅ Keeping the diagonal layout */}
       <div className="relative flex flex-col items-center gap-8">
         {howItWorkData.map((data, index) => (
           <div
             key={data.id}
-            className={`relative p-6 w-72 text-center bg-gradient-to-r from-[#4F46E5] to-[#6366F1] rounded-xl shadow-xl hover:scale-105 transition-transform 
+            className={`relative p-6 w-72 text-center bg-gradient-to-r from-[#4F46E5] to-[#6366F1] rounded-xl shadow-xl hover:scale-105 transition-transform
             ${
               index === 0
                 ? "lg:self-start"
@@ -30,7 +31,7 @@ const HowItWorks = () => {
           </div>
         ))}
       </div>
-    </section>
+    </LandingSection>
   );
 };
 

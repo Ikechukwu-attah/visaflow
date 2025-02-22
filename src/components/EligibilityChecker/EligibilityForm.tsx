@@ -100,14 +100,14 @@ const EligibilityForm: React.FC = () => {
           <StepFive
             nextStep={nextStep}
             prevStep={prevStep}
-            setGenderDetails={setGenderDetails} // ✅ Corrected function
+            setGenderDetails={setGenderDetails}
           />
         )}
         {step === 6 && (
           <StepSix
             nextStep={nextStep}
             prevStep={prevStep}
-            setRefugeeStatus={setRefugeeStatus} // ✅ Corrected function
+            setRefugeeStatus={setRefugeeStatus}
           />
         )}
         {step === 7 && (
