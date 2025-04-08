@@ -1,19 +1,20 @@
 import { useState } from "react";
 import apiClient from "../ApiConfig/apiClient";
 
-export const useUserInfo = () => {
-  const [userData, setUserData] = useState(null);
+export const useGetRequiredDoc = () => {
+  const [requiredData, setRequiredData] = useState(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const userInfo = async () => {
+  const getRequiredDoc = async (visaType: string | null) => {
     console.log("error", error);
     setIsLoading(true);
     try {
-      console.log("hello it me kudos");
-      const res = await apiClient.get("/auth/user");
-      console.log("user response", res.data);
-      setUserData(res.data);
+      const res = await apiClient.get(
+        `/document-requirements/list?visaType=${visaType}`
+      );
+
+      setRequiredData(res.data);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -25,5 +26,5 @@ export const useUserInfo = () => {
       setIsLoading(false);
     }
   };
-  return { userData, error, isLoading, userInfo };
+  return { requiredData, error, isLoading, getRequiredDoc };
 };

@@ -1,19 +1,27 @@
 import { useState } from "react";
-import apiClient from "../ApiConfig/apiClient";
+import apiClient from "../../ApiConfig/apiClient";
 
-export const useUserInfo = () => {
-  const [userData, setUserData] = useState(null);
+type VisaTypeResponse = {
+  bestVisaType: string;
+  reasoning: string;
+  confidence: string;
+};
+export const useGetVisaType = () => {
+  const [visaType, setVisaType] = useState<VisaTypeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const userInfo = async () => {
+  const getVisaType = async (userResponse) => {
     console.log("error", error);
     setIsLoading(true);
     try {
       console.log("hello it me kudos");
-      const res = await apiClient.get("/auth/user");
+      const res = await apiClient.post(
+        "/visa-recommendation/determine",
+        userResponse
+      );
       console.log("user response", res.data);
-      setUserData(res.data);
+      setVisaType(res.data);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -25,5 +33,5 @@ export const useUserInfo = () => {
       setIsLoading(false);
     }
   };
-  return { userData, error, isLoading, userInfo };
+  return { visaType, error, isLoading, getVisaType };
 };

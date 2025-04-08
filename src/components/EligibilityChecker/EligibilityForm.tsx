@@ -43,6 +43,15 @@ const EligibilityForm: React.FC = () => {
     previousRefugeeApplication: "",
   });
 
+  console.log("collected Data", {
+    personalInfo,
+    travelPurpose,
+    travelHistory,
+    employmentDetails,
+    genderDetails,
+    refugeeStatus,
+  });
+
   // ✅ Prevent Progress Bar from Increasing Beyond Step 6
   const nextStep = () => {
     if (step < 7) {

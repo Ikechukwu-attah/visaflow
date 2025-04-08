@@ -3,7 +3,7 @@ import React from "react";
 interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
-  message: string;
+  message: string | string[];
 }
 
 const SuccessModal: React.FC<SuccessModalProps> = ({
@@ -17,7 +17,15 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md text-center">
         <h2 className="text-xl font-bold text-green-600">Success!</h2>
-        <p className="text-gray-700 mt-2">{message}</p>
+        {Array.isArray(message) ? (
+          <ul className="list-disc list-inside text-gray-800 text-left space-y-1 mb-6">
+            {message.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-red-600 mt-2 text-sm">{message}</p>
+        )}
 
         <button
           onClick={onClose}

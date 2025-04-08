@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useGetVisaType } from "../../hooks/auth/useGetVisaType";
+import Spinner from "../Spinner/Spinner";
+import SuccessModal from "../modal/SuccessModal";
+import { useGetRequiredDoc } from "../../hooks/usegetRequiredDoc";
 
 type ResultsProps = {
   userResponses: {
@@ -31,6 +35,21 @@ type ResultsProps = {
 };
 
 const Results: React.FC<ResultsProps> = ({ userResponses }) => {
+  const { visaType, getVisaType, isLoading, error } = useGetVisaType();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const {
+    getRequiredDoc,
+    isLoading: isLoadingDoc,
+    requiredData,
+  } = useGetRequiredDoc();
+
+  useEffect(() => {
+    getVisaType(userResponses);
+  }, [userResponses]);
+
+  console.log("vias type", visaType);
+  console.log("required document", requiredData);
+
   const getVisaRecommendation = () => {
     const { travelPurpose, travelHistory, employmentDetails } = userResponses;
 
@@ -91,21 +110,41 @@ const Results: React.FC<ResultsProps> = ({ userResponses }) => {
       </h2>
 
       {/* Visa Recommendation Section */}
-      <div className="bg-gray-100 p-5 rounded-lg">
-        <p className="text-lg font-semibold">Recommended Visa:</p>
-        <p className="text-xl font-bold text-blue-600">{recommendation.visa}</p>
-        <p className="text-gray-700 mt-2">{recommendation.reason}</p>
-      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className="bg-gray-100 p-5 rounded-lg">
+          <p className="text-lg font-semibold">Recommended Visa:</p>
+          <p className="text-xl font-bold text-blue-600">
+            {visaType?.bestVisaType}
+          </p>
+          <p className="text-lg font-semibold">Reason:</p>
+          <p className="text-gray-700 mt-2">{visaType?.reasoning}</p>
+          <p className="text-lg font-semibold">Score:</p>
+          <p className="text-gray-700 mt-2">{visaType?.confidence}</p>
+        </div>
+      )}
 
       {/* Next Steps */}
       <div className="mt-6 flex flex-col sm:flex-row gap-4">
         <button className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition">
           Proceed to Visa Application
         </button>
-        <button className="w-full bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition">
-          Learn More About This Visa
+        <button
+          onClick={() => {
+            setIsSuccess(true);
+            getRequiredDoc(visaType?.bestVisaType || null);
+          }}
+          className="w-full bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700 transition"
+        >
+          See Required Documents
         </button>
       </div>
+      <SuccessModal
+        message={requiredData?.requiredDocuments || ""}
+        isOpen={isSuccess}
+        onClose={() => setIsSuccess(false)}
+      />
     </div>
   );
 };

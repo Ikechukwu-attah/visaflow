@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import apiClient from "../../ApiConfig/apiClient";
+
+import { useUserInfo } from "../../hooks/useUserInfo";
 
 interface User {
   email: string;
@@ -28,24 +29,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  // const [loading, setLoading] = useState<boolean>(true);
+  const { userData, userInfo, error, isLoading: loading } = useUserInfo();
 
-  console.log({ user });
+  console.log("userData", userData);
+  console.log("user", user);
 
   useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const userData = await apiClient.get<User>("/auth/me");
-        setUser(userData.data);
-      } catch (error) {
-        setUser(null);
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadUser();
+    userInfo();
+    setUser(userData);
+    if (userData) {
+      console.log("loading....");
+    }
   }, []);
+
+  useEffect(() => {
+    setUser(userData);
+  }, [userData]);
 
   // const logout = () => {
   //   apiClient.post("/auth/logout");
