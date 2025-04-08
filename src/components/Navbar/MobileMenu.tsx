@@ -1,4 +1,3 @@
-import React from "react";
 import { navbarItem } from "./data";
 import { Link } from "react-router-dom";
 

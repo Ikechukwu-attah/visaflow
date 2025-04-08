@@ -24,7 +24,7 @@ const plans = [
 ];
 
 const Payment = () => {
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = React.useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handlePayment = (plan: string) => {

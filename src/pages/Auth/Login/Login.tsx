@@ -1,13 +1,25 @@
-import React, { FC } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { jwtDecode } from "jwt-decode";
 import MainLayout from "../../../layouts/MainLayout";
+import { LoginResponse, useUserAuth } from "../../../hooks/auth/useUserAuth";
+import { useNavigate } from "react-router";
+import Spinner from "../../../components/Spinner/Spinner";
+import { useAuth } from "../../../context/Auth/AuthContext";
 
 type Inputs = {
   email: string;
   password: string;
 };
 
-const Login: FC = () => {
+type DecodedToken = {
+  email: string;
+  username: string;
+  role: "user" | "admin";
+  iat: number;
+  exp: number;
+};
+const Login: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -15,9 +27,45 @@ const Login: FC = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) =>
-    console.log({ data });
+  const { userAuth, isLoading, error, userData } = useUserAuth();
+  const navigate = useNavigate();
+  const [token, setToken] = useState({});
+  const { setUser } = useAuth();
+  console.log({ userData });
 
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    console.log({ data });
+    await userAuth("login", data);
+  };
+
+  let data;
+  console.log(data);
+
+  console.log(userData);
+  useEffect(() => {
+    if (userData && "accessToken" in userData) {
+      setToken(userData);
+      navigate("/dashboard");
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    if (token && "accessToken" in token) {
+      const { accessToken } = token as LoginResponse;
+
+      const decodedData = jwtDecode<DecodedToken>(accessToken);
+      const formattedData = {
+        email: decodedData?.email,
+        username: decodedData?.username,
+        role: decodedData?.role,
+      };
+
+      console.log("formatted data", formattedData);
+      console.log("ikkkkk", decodedData);
+
+      setUser(decodedData);
+    }
+  }, [token, userData]);
   return (
     <MainLayout>
       <div
@@ -70,12 +118,12 @@ const Login: FC = () => {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition"
-          >
-            Login
-          </button>
+          <div className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition  flex gap-4 justify-center items-center">
+            <button type="submit" className="">
+              Login
+            </button>
+            {!isLoading && <Spinner />}
+          </div>
         </form>
 
         {/* Footer Links */}

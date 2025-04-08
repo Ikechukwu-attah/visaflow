@@ -1,4 +1,3 @@
-import React from "react";
 import { howItWorkData } from "./data";
 import LandingSection from "../../layouts/LandingSection";
 

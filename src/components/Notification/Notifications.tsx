@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaBell } from "react-icons/fa";
 
 const notifications = [
@@ -13,7 +13,13 @@ const Notifications = () => {
   return (
     <div className="relative">
       {/* Notification Bell */}
-      <button onClick={() => setIsOpen(!isOpen)} className="relative">
+      <button
+        onClick={() => {
+          setIsOpen((prev) => !prev);
+          console.log("notification status", isOpen);
+        }}
+        className="relative cursor-pointer"
+      >
         <FaBell className="text-xl text-gray-700" />
         {notifications.length > 0 && (
           <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 rounded-full">
@@ -24,7 +30,7 @@ const Notifications = () => {
 
       {/* Notification Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg p-4">
+        <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg p-4 ">
           <h4 className="text-sm font-semibold">Notifications</h4>
           <ul className="mt-2 text-sm">
             {notifications.map((notification) => (

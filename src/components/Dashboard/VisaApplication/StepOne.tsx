@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 interface StepProps {
   nextStep: () => void;
-  setPersonalInfo: (info: {
+  setPersonalInfo?: (info: {
     name: string;
     age: string;
     nationality: string;
@@ -16,15 +16,14 @@ type FormValues = {
   nationality: string;
 };
 
-const StepOne: React.FC<StepProps> = ({ nextStep, setPersonalInfo }) => {
+const StepOne: React.FC<StepProps> = ({ nextStep }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    setPersonalInfo(data);
+  const onSubmit: SubmitHandler<FormValues> = (_data) => {
     nextStep();
   };
 

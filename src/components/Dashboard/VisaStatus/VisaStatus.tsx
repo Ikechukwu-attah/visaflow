@@ -1,5 +1,3 @@
-import React from "react";
-
 const VisaStatus = () => {
   return (
     <div className="bg-white shadow-lg rounded-lg p-6">

@@ -1,4 +1,3 @@
-import React from "react";
 import MainLayout from "../layouts/MainLayout";
 import HeroSection from "../components/Hero/hero";
 import HowItWorks from "../components/HowItWorks/HowItWorks";
@@ -14,12 +13,19 @@ const Home = () => {
     <MainLayout>
       <div className="">
         <HeroSection />
-        <HowItWorks />
+
         <WhyChooseUs />
-        <PricingPlans />
-        <FAQ />
-        <ContactUs />
+
+        <HowItWorks />
+
         <Testimonials />
+
+        <PricingPlans />
+
+        <FAQ />
+
+        <ContactUs />
+
         <CallToAction />
       </div>
     </MainLayout>

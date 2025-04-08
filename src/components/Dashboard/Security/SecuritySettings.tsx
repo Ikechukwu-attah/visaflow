@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SecuritySettings = () => {
   const [password, setPassword] = useState("");

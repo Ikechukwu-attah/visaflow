@@ -1,22 +1,38 @@
-import React, { FC } from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import MainLayout from "../../../layouts/MainLayout";
+import { useUserAuth } from "../../../hooks/auth/useUserAuth";
+import { useNavigate } from "react-router";
+import Spinner from "../../../components/Spinner/Spinner";
 
 type Inputs = {
-  fullName: string;
+  fullname: string;
   email: string;
   password: string;
 };
 
-const Signup: FC = () => {
+const Signup: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) =>
-    console.log({ data });
+  const { userData, userAuth, isLoading, error } = useUserAuth();
+  console.log({ userData });
+
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    await userAuth("register", data);
+  };
+
+  useEffect(() => {
+    if (userData) {
+      navigate("/login");
+    }
+  }, [userData]);
+
+  console.log("base url", import.meta.env.VITE_APP_API_BASE_URL);
 
   return (
     <MainLayout>
@@ -41,12 +57,12 @@ const Signup: FC = () => {
             <input
               type="text"
               placeholder="Enter your full name"
-              {...register("fullName", { required: "Full name is required" })}
+              {...register("fullname", { required: "Full name is required" })}
               className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            {errors.fullName && (
+            {errors.fullname && (
               <span className="text-red-500 text-xs">
-                {errors.fullName.message}
+                {errors.fullname.message}
               </span>
             )}
           </div>
@@ -88,12 +104,12 @@ const Signup: FC = () => {
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition"
-          >
-            Sign Up
-          </button>
+          <div className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition  flex gap-4 justify-center items-center">
+            <button type="submit" className="">
+              Sign Up
+            </button>
+            {!isLoading && <Spinner />}
+          </div>
         </form>
 
         {/* Footer Links */}

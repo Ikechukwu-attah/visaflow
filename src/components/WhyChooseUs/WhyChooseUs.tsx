@@ -1,4 +1,3 @@
-import React from "react";
 import { FaBolt, FaClock, FaShieldAlt } from "react-icons/fa";
 import LandingSection from "../../layouts/LandingSection";
 
@@ -25,7 +24,10 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <LandingSection className="bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900 text-gray-900 dark:text-white py-20">
+    <LandingSection
+      id=""
+      className="bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900 text-gray-900 dark:text-white py-20"
+    >
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold">Why Choose Us?</h2>
       </div>

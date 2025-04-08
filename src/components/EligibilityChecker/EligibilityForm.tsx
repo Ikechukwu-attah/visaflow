@@ -57,7 +57,7 @@ const EligibilityForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10">
+    <div className=" w-full max-w-3xl mx-auto mt-10">
       {/* ✅ Fixed Progress Bar */}
       <div className="mb-4 text-center text-gray-600">
         Step {Math.min(step, 6)} of 6

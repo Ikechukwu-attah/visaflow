@@ -1,9 +1,11 @@
-import React from "react";
 import LandingSection from "../../layouts/LandingSection";
 
 const CallToAction = () => {
   return (
-    <LandingSection className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center">
+    <LandingSection
+      id=""
+      className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-center"
+    >
       <div className="max-w-3xl mx-auto">
         <h2 className="text-4xl font-bold">Start Your Visa Process Today!</h2>
         <p className="text-lg mt-4 opacity-90">

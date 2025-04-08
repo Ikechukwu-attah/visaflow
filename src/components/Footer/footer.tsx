@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import logo from "/assets/logo.webp";
 import { footerData } from "./data";
 import { Link } from "react-router-dom";

@@ -1,4 +1,3 @@
-import React from "react";
 import LandingSection from "../../layouts/LandingSection";
 
 const plans = [

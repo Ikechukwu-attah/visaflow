@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import MainLayout from "../../../layouts/MainLayout";
 

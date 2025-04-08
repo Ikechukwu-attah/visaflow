@@ -1,4 +1,3 @@
-import React from "react";
 import { FaStar } from "react-icons/fa";
 import LandingSection from "../../layouts/LandingSection";
 
